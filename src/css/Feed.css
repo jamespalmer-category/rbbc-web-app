@@ -1,0 +1,44 @@
+/* Leaderboard.css */
+
+/* FeedPage.css */
+
+.feed-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .feed-entry {
+    background-color: #f7f4f1; /* Dishwater brown */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feed-entry img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .feed-content {
+    margin-top: 10px;
+  }
+  
+  .feed-content h3 {
+    font-size: 1.2rem;
+    margin: 0 0 5px;
+  }
+  
+  .feed-content p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .feed-entry img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px; /* Adjust this value as needed */
+  }
+  
+  /* Adjust other styles as needed */

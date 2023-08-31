@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import Leaderboard from './components/Leaderboard';
+import Feed from './components/Feed';
+import Home from './components/Home';
+import Player from './components/Player';
 
-function App() {
+
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div>
+        <nav className="navbar">
+              <Link to="/">Home</Link> 
+              <Link to="/Leaderboard">Leaderboard</Link> 
+              <Link to="/Feed">Feed</Link> 
+              <Link to="/Player">Report Event</Link>
+        </nav>
+
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/Leaderboard" element={<Leaderboard/>} />
+          <Route path="/Feed" element={<Feed/>} />
+          <Route path="/Player"element={<Player/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+    
   );
-}
+
+
+};
 
 export default App;

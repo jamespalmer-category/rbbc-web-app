@@ -1,0 +1,33 @@
+/* EventButton.css */
+
+.event-button-container {
+    background-color: #f7f4f1; /* Dishwater brown color */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Set the flex direction to column */
+    align-items: center; /* Center items horizontally */
+  }
+  
+  
+  .event-button {
+    background-color: #264653; /* Turquoise color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    background-image: url('../components/images/Mr_Ruddles.jpg'); /* Add the path to your image */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: 10px; /* Add some vertical spacing between buttons */
+    margin-bottom: 10px;
+  }
+
+  .popup {
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #CD5C5C;
+    font-family: Impact, sans-serif;
+    /* Your existing styles for the pop-up */
+  }
