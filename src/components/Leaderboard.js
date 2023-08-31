@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import '../css/Leaderboard.css';
 import { db } from '../firebase';
-import {collection, query, orderBy, onSnapshot, setDoc, doc} from 'firebase/firestore'
+import {collection, query, where, orderBy, onSnapshot, setDoc, doc} from 'firebase/firestore'
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
+  //Pop up states
+  const [popupVisible, setPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
 
 
