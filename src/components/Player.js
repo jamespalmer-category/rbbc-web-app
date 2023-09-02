@@ -43,7 +43,7 @@ useEffect(() => {
 
 // get the feed length
 useEffect(() => {
-  const feedRef = collection(db, 'feed_2');
+  const feedRef = collection(db, 'feed');
     
     onSnapshot(feedRef,(snapshot) => {
       let feed = []
