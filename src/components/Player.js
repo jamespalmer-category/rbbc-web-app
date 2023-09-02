@@ -43,7 +43,7 @@ useEffect(() => {
 
 // get the feed length
 useEffect(() => {
-  const feedRef = collection(db, 'feed');
+  const feedRef = collection(db, 'feed_2');
     
     onSnapshot(feedRef,(snapshot) => {
       let feed = []
@@ -57,8 +57,6 @@ useEffect(() => {
   })
 
   const handleEventReport = (player, event) => {
-    console.log("id field:",player.id);
-    console.log('fuck me senseless',doc(db, 'players', String(player.id)));
 
     if (player && event) {
       // Make sure player and event are valid
@@ -82,7 +80,10 @@ useEffect(() => {
         score: player.score
       }).then(() => {
         const feedRef = collection(db, 'feed');
+        const currentTime = new Date();
+        console.log(currentTime)
           const newFeedEntry = {
+            time: currentTime,
             id: feedLen,
             eventName: event.name,
             eventScore: event.score,
@@ -91,6 +92,7 @@ useEffect(() => {
             eventString: event.string
           };
           //check right id
+          console.log("id:",newFeedEntry);
           console.log("id:",newFeedEntry.id);
         
         addDoc(feedRef, newFeedEntry)

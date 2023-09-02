@@ -19,7 +19,6 @@ const Leaderboard = () => {
     const q = query(playersRef, orderBy('score', 'desc'))
 
     onSnapshot(q, (snapshot) => {
-      console.log(snapshot.docs)
       let leaderboard = []
       snapshot.docs.forEach((doc) => {
         leaderboard.push({
@@ -41,18 +40,18 @@ const Leaderboard = () => {
   const handlePlayer = (name) => {
     const playersRef = collection(db, 'players'); 
     // Add a function where it'll check if the name is unique on the leaderboard, with a pop-up that says what the issue is.
-    const q = query(playersRef, where("name", "==", name))
-    if (!q) {
-      showPopup('Name already entered!');
-      return;
-    }
+    // const q = query(playersRef, where("name", "==", name))
+    // console.log("query result:", q)
+    // console.log(!q)
+    // if (!q) {
+    //   showPopup('Name already entered!');
+    //   return;
+    // }
     const newPlayer = {
       id: leaderboard.length+1,
       name: name.trim(),
       score: 0
     };
-    console.log(newPlayer)
-
     // Get a reference to the "players" collection
     
     setDoc(doc(playersRef, String(newPlayer.id)),newPlayer)
@@ -96,7 +95,6 @@ const Leaderboard = () => {
           return;
         }
         handlePlayer(name);
-        console.log(name);
         e.target.reset()}}>
           <div className='mb-3'>
               <label className='mb-3' htmlFor="name"><strong>Name</strong></label>

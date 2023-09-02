@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import axios from 'axios';
 import '../css/Feed.css';
 import { db } from '../firebase';
 import {collection, query, orderBy, onSnapshot} from 'firebase/firestore'
@@ -14,7 +13,7 @@ const FeedPage = () => {
     useEffect(() => {
       const feedRef = collection(db, 'feed');
   
-      const q = query(feedRef, orderBy('id', 'desc'))
+      const q = query(feedRef, orderBy('time', 'desc'))
   
       onSnapshot(q, (snapshot) => {
         let feed = []
@@ -26,6 +25,8 @@ const FeedPage = () => {
         })
       })
     }, []);
+    // console.log('feedData[0]')
+    // console.log(feedData[0]);
   
   const ImageLoader = ({ imageUrl, alt }) => {
     const [image, setImage] = useState(null);
@@ -55,6 +56,7 @@ const FeedPage = () => {
         {feedData.map((entry) => (
           <div key={entry.id} className="feed-entry">
             <h3>{entry.eventName}</h3>
+            {/* <p>{entry.time.toDate()}</p>  */}
             <p><b>{entry.playerName}</b> {entry.eventString}</p>
             <div className="feed-content">
               <p>Event Score: {entry.eventScore}</p>
