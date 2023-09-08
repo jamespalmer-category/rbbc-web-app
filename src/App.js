@@ -5,7 +5,8 @@ import Leaderboard from './components/Leaderboard';
 import Feed from './components/Feed';
 import Home from './components/Home';
 import Player from './components/Player';
-import Login from './components/Login';
+import LoginPage from './components/LoginPage';
+import AuthDetails from './components/auth/AuthDetails';
 
 
 const App = () => {
@@ -13,19 +14,23 @@ const App = () => {
     <BrowserRouter>
       <div>
         <nav className="navbar">
+          <div>
               <Link to="/">Home</Link> 
               <Link to="/Leaderboard">Leaderboard</Link> 
               <Link to="/Feed">Feed</Link> 
               <Link to="/Player">Report Event</Link>
-              {/* <Link to="/Login">Login</Link> */}
+          </div>
+          <div>
+              <AuthDetails/>
+          </div>
         </nav>
 
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/Leaderboard" element={<Leaderboard/>}/>
           <Route path="/Feed" element={<Feed/>}/>
-          <Route path="/Player"element={<Player/>}/>
-          {/* <Route path="/Login"element={<Login/>} /> */}
+          <Route path="/Player" element={<Player/>}/>
+          <Route path="/LoginPage" element={<LoginPage/>}/>
         </Routes>
       </div>
     </BrowserRouter>

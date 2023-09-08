@@ -40,9 +40,43 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   letter-spacing: 1px; /* Add some spacing between characters */
+  display: flex;
+  justify-content: space-between; /* Space between Links and AuthDetails */
+  align-items: center; /* Vertically align items in the center */
 }
 
 .navbar a:hover {
   background-color: #DAA520;
   color: #5E3C0D; /* Dark brown text color on hover */
+}
+
+.navbar p {
+  float: left;
+  font-size: 18px; /* Slightly smaller font size for a rustic look */
+  color: #CD5C5C;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  letter-spacing: 1px; /* Add some spacing between characters */
+  margin: 0; /* Add this line to remove any default margin */
+}
+
+.centered-button {
+  float: left; /* Float left to align with other elements in the navbar */
+  font-size: 18px; /* Slightly smaller font size for consistency */
+  color: #CD5C5C;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  letter-spacing: 1px; /* Add some spacing between characters */
+  margin: 0; /* Remove default margin */
+  background-color: #DAA520;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add hover transition effect */
+}
+
+.centered-button:hover {
+  background-color: #5E3C0D; /* Darker brown background color on hover */
+  color: #CD5C5C; /* Text color on hover */
 }
