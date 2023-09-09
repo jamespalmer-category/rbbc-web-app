@@ -2,9 +2,11 @@ import React, { useState, useEffect, Fragment } from 'react';
 import '../css/Feed.css';
 import { db } from '../firebase';
 import {collection, query, orderBy, onSnapshot} from 'firebase/firestore'
+import { useAuth } from './auth/AuthContext';
 
 const FeedPage = () => {
   const [feedData, setFeedData] = useState([]);
+  const {authUser} = useAuth();
 
     const loadImage = (imageUrl) => {
       return import(`./images/${imageUrl}`).then((imageModule) => imageModule.default);
@@ -48,6 +50,13 @@ const FeedPage = () => {
   );
 };
   
+if (!authUser) {
+  return (
+    <div className="event-button-container">
+      <p>Please log in to access this feature.</p>
+    </div>
+  );
+}
 
   return (
     <div className="feed-container">

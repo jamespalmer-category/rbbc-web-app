@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Player.css';
 import { db } from '../firebase';
-import {collection,doc,onSnapshot, 
-  addDoc, updateDoc, getDoc, getCountFromServer} from 'firebase/firestore'
+import {collection, doc, onSnapshot, 
+  addDoc, updateDoc} from 'firebase/firestore'
+import { useAuth } from './auth/AuthContext';
 
 const EventButton = () => {
   const [events, setEvents] = useState([]);
@@ -12,6 +13,7 @@ const EventButton = () => {
   const [selectedPlayer, setSelectedPlayer] = useState('{}');
   const [popupVisible, setPopupVisible] = useState(false);
   const [feedLen, setFeedLen]=useState(0)
+  const {authUser} = useAuth();
 // Load event data from local storage on component mount
 useEffect(() => {
   const EventsRef = collection(db, 'events');
@@ -112,6 +114,14 @@ useEffect(() => {
       setPopupVisible(false);
     }, 4000); // Hide the pop-up after 4 seconds
   };
+
+  if (!authUser) {
+    return (
+      <div className="event-button-container">
+        <p>Please log in to access this feature.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="event-button-container">

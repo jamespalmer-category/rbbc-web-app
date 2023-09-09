@@ -61,6 +61,15 @@ body {
   margin: 0; /* Add this line to remove any default margin */
 }
 
+.navbar .navbar-links {
+  margin-right: auto; /* Pushes the Links to the left */
+}
+
+.navbar .auth-details {
+  margin-left: auto; /* Pushes AuthDetails to the right */
+  /* Add your specific styles for AuthDetails here */
+}
+
 .centered-button {
   float: left; /* Float left to align with other elements in the navbar */
   font-size: 18px; /* Slightly smaller font size for consistency */
