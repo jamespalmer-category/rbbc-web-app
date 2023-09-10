@@ -62,7 +62,7 @@ useEffect(() => {
 
     if (player && event) {
       // Make sure player and event are valid
-      if (!player.id) {
+      if (!player.user) {
         console.error('Invalid player data');
         return;
       }
@@ -77,7 +77,7 @@ useEffect(() => {
       player.score += event.score;
       console.log('new score:',player.score);
       //issue on this line
-      const playerRef = doc(db, 'players', String(player.id));
+      const playerRef = doc(db, 'players', String(player.user));
       updateDoc(playerRef, {
         score: player.score
       }).then(() => {
@@ -148,16 +148,16 @@ useEffect(() => {
       <label>
         Select Player: 
         <select
-          value={selectedPlayer ? selectedPlayer.id : ''}
+          value={selectedPlayer ? selectedPlayer.user : ''}
           onChange={(e) => {
-            const selectedPlayerId = parseInt(e.target.value, 10);
-            const selectedPlayerObject = players.find(player => player.id === selectedPlayerId);
+            const selectedPlayerEmail = e.target.value;
+            const selectedPlayerObject = players.find(player => player.user === selectedPlayerEmail);
             setSelectedPlayer(selectedPlayerObject);
           }}
         >
           <option value="">Select a player</option>
           {players.map((player) => (
-            <option key={player.id} value={player.id}>
+            <option key={player.user} value={player.user}>
               {player.name}
             </option>
           ))}

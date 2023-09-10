@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import '../css/Leaderboard.css';
 import { db } from '../firebase';
-import {collection, query, orderBy, onSnapshot, addDoc} from 'firebase/firestore'
+import {collection, query, orderBy, onSnapshot, addDoc, doc, setDoc} from 'firebase/firestore'
 import { useAuth } from './auth/AuthContext';
 
 const Leaderboard = () => {
@@ -57,7 +57,9 @@ const Leaderboard = () => {
     };
     // Get a reference to the "players" collection
 
-    addDoc(playersRef,newPlayer)
+    //addDoc(playersRef,newPlayer)
+
+    setDoc(doc(db, 'players', authUser.email), newPlayer)
       .then((docRef) => {
         console.log('Player added with email:', docRef.id);
       })
