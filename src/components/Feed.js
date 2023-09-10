@@ -20,6 +20,7 @@ const FeedPage = () => {
       onSnapshot(q, (snapshot) => {
         let feed = []
         snapshot.docs.forEach((doc) => {
+          //console.log(doc.data().time.toDate())
           feed.push({
             ...doc.data()
           })
@@ -72,7 +73,7 @@ if (!authUser) {
               {entry.eventImageUrl && (
                 <ImageLoader imageUrl={entry.eventImageUrl} alt={entry.eventName} />
               )}
-              <p>Reported by {entry.reportingPlayer}</p>
+              <p>Reported by <b>{entry.reportingPlayer}</b> at {entry.time.toDate().toLocaleString()}</p>
             </div>
           </div>
         ))}
