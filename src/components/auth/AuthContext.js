@@ -6,11 +6,13 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
+  //cosnt [userDisplayName, setUserDisplayName] = useState('')
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
         if (user) {
             setAuthUser(user)
+            //setUserDisplayName(user.displayName)
     } else {
         setAuthUser(null);
     }

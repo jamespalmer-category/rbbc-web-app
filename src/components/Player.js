@@ -91,7 +91,8 @@ useEffect(() => {
             eventScore: event.score,
             playerName: player.name,
             eventImageUrl: event.imageUrl,
-            eventString: event.string
+            eventString: event.string,
+            reportingPlayer: authUser.displayName
           };
           //check right id
           console.log("id:",newFeedEntry);

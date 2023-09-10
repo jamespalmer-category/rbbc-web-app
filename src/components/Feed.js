@@ -72,6 +72,7 @@ if (!authUser) {
               {entry.eventImageUrl && (
                 <ImageLoader imageUrl={entry.eventImageUrl} alt={entry.eventName} />
               )}
+              <p>Reported by {entry.reportingPlayer}</p>
             </div>
           </div>
         ))}
@@ -79,6 +80,5 @@ if (!authUser) {
     </div>
   );
 };
-
 
 export default FeedPage;

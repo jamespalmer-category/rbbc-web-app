@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import '../css/Leaderboard.css';
 import { db } from '../firebase';
-import {collection, query, orderBy, onSnapshot, setDoc, doc} from 'firebase/firestore'
+import {collection, query, orderBy, onSnapshot, addDoc} from 'firebase/firestore'
 import { useAuth } from './auth/AuthContext';
 
 const Leaderboard = () => {
@@ -14,22 +14,23 @@ const Leaderboard = () => {
   const {authUser} = useAuth();
 
 
-  //real time data collection
   useEffect(() => {
     const playersRef = collection(db, 'players');
 
-    const q = query(playersRef, orderBy('score', 'desc'))
+    const q = query(playersRef, orderBy('score', 'desc'));
 
     onSnapshot(q, (snapshot) => {
-      let leaderboard = []
+      const newLeaderboard = []; // Create a new array to accumulate data
+
       snapshot.docs.forEach((doc) => {
-        leaderboard.push({
+        newLeaderboard.push({
           ...doc.data()
-        })
-        setLeaderboard(leaderboard)
-      })
-    })
-  }, []);
+        });
+      });
+      console.log(newLeaderboard)
+      setLeaderboard(newLeaderboard); // Update the state once after the loop is complete
+    });
+  }, []); // Empty dependency array to run the effect once
 
   const showPopup = (message) => {
     setPopupMessage(message);
@@ -40,25 +41,25 @@ const Leaderboard = () => {
   };
 
   const handlePlayer = (name) => {
-    const playersRef = collection(db, 'players'); 
-    // Add a function where it'll check if the name is unique on the leaderboard, with a pop-up that says what the issue is.
-    // const q = query(playersRef, where("name", "==", name))
-    // console.log("query result:", q)
-    // console.log(!q)
-    // if (!q) {
-    //   showPopup('Name already entered!');
-    //   return;
-    // }
+
+    const emailExistsInLeaderboard = leaderboard.some((entry) => entry.user === authUser.email);
+
+    if (emailExistsInLeaderboard) {
+      showPopup('You\'ve already signed up!');
+      return;
+    }
+
+    const playersRef = collection(db, 'players');
     const newPlayer = {
-      id: leaderboard.length+1,
       name: name.trim(),
-      score: 0
+      score: 0,
+      user: authUser.email
     };
     // Get a reference to the "players" collection
-    
-    setDoc(doc(playersRef, String(newPlayer.id)),newPlayer)
+
+    addDoc(playersRef,newPlayer)
       .then((docRef) => {
-        console.log('Player added with ID:', docRef.id);
+        console.log('Player added with email:', docRef.id);
       })
       .catch((error) => {
         console.error('Error adding player:', error);
@@ -101,7 +102,7 @@ const Leaderboard = () => {
         e.preventDefault();
         const name = e.target.name.value;
         if (!name.trim()) {
-          showPopup('Please Enter Your Name!');
+          showPopup('Please Enter Your Desired Display Name!');
           return;
         }
         handlePlayer(name);
@@ -114,7 +115,6 @@ const Leaderboard = () => {
           <p>Click here to join the RUDDLES BEST BITTER CHALLENGE</p>
           <Link to='../Player'>Report progress here!</Link>
       </form>
-      {/* Conditional rendering for the pop-up */}
       {popupVisible && <div className="popup">{popupMessage}</div>}
     </div>
     </div>
